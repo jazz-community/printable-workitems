@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const JazzUpdateSitePlugin = require('jazz-update-site-webpack-plugin');
 const packageJson = require('./package.json');
+const core = require('@actions/core');
 const DisableOutputWebpackPlugin = require("disable-output-webpack-plugin");
 const RemovePlugin = require("remove-files-webpack-plugin");
 
@@ -56,5 +57,11 @@ module.exports = (env) => {
 			}),
 		],
 	};
+
+	if (process.env["GITHUB_ACTIONS"]) {
+		// Set the output file name for use in GitHub Actions
+		core.setOutput("output_file", `${projectId}_${version}.zip`);
+	}
+
 	return config;
 };
