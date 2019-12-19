@@ -5,7 +5,7 @@
 .project
 .idea/
 .vscode/
-/com.siemens.bt.jazz.workitemeditor.printableworkitems*.zip
+/com.siemens.bt.jazz.viewlet.printableworkitems*.zip
 deployment-properties.ini
 dist/
 jbe-build-wrapper.xml

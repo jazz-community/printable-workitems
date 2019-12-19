@@ -8,6 +8,7 @@ const RemovePlugin = require("remove-files-webpack-plugin");
 module.exports = (env) => {
 	env && env.buildUUID && console.info(`Build UUID is passed along: '${env.buildUUID}'`);
 	const version = env && env.buildUUID || packageJson.version;
+	const projectId = "com.siemens.bt.jazz.viewlet.printableworkitems";
 
 	const config = {
 		entry: {
@@ -20,7 +21,7 @@ module.exports = (env) => {
 			new DisableOutputWebpackPlugin(),
 			new JazzUpdateSitePlugin({
 				appType: 'ccm',
-				projectId: "com.siemens.bt.jazz.viewlet.printableworkitems",
+				projectId: projectId,
 				acceptGlobPattern: [
 					'resources/**',
 					'!resources/**/src/**',
@@ -43,7 +44,7 @@ module.exports = (env) => {
 							folder: "./",
 							method: filePath => {
 								return new RegExp(
-									/com\.siemens\.bt\.jazz\.workitemeditor\.printableworkitems.*\.zip$/,
+									/com\.siemens\.bt\.jazz\.viewlet\.printableworkitems.*\.zip$/,
 									"i"
 								).test(filePath);
 							}
