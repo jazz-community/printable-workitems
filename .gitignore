@@ -1,0 +1,13 @@
+*.iml
+*.jazzignore
+*.log
+*.swp
+.project
+.idea/
+.vscode/
+/com.siemens.bt.jazz.workitemeditor.printableworkitems*.zip
+deployment-properties.ini
+dist/
+jbe-build-wrapper.xml
+node_modules/
+resouces/jazzUtilities/modules/build/*.js

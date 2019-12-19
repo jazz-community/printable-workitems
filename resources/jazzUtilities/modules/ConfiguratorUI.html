@@ -1,0 +1,338 @@
+<div class="content">
+	<div class="configuratorUI header">
+		<table class="configuratorUI">
+			<tr>
+				<td>
+					Total Fields: <span
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.fields">xxx</span>;
+					Regions: <span
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.regions">xxx</span>;
+					Region Fields: <span
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.region.fields">xxx</span>;
+
+					Height: <span>
+						<input style="width: 5%" type="number"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.height"
+							value="1" min="1" max="100" attachmentValue="disabled"></span>
+
+					Width: <span>
+						<input style="width: 5%" type="number"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.width"
+							value="1" min="1" max="100" attachmentValue="disabled"></span>
+
+					<span>
+						<label
+							for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.table.position">Table
+							Position: </label>
+						<select attachmentValue="disabled"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.table.position">
+							<option value="left">Left</option>
+							<option value="center" selected>Center</option>
+							<option value="right">Right</option>
+						</select>
+					</span>
+
+					<label attachmentValue="hidden"
+						for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.border"
+						title="Should a border be drawn around the content [default = true] (Needs to be set per Type)">
+						Outer Border: </label><span attachmentValue="hidden">
+						<input type="checkbox"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.border"
+							checked="true">
+					</span>
+
+					<label
+						for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.config.location">
+						Config from: </label>
+					<select
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.config.location">
+						<option value="workitem">Workitem</option>
+						<option value="attachment">Process Attachment</option>
+					</select>
+
+				</td>
+				<td class="rightPosition">
+					Current Position: <span
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.position">
+						X;
+						Y;
+					</span>
+				</td>
+			</tr>
+
+			<tr>
+				<!--Blank-->
+			</tr>
+
+			<tr attachmentValue="hidden">
+				<td colspan="2">
+					<input type="button" value="Create Type"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.create.type">
+					<input type="button" value="Rename Type"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.rename.type">
+					<input type="button" value="Duplicate Type"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.duplicate.type">
+					<input type="button" value="Delete Type"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.delete.type">
+					<input type="button" value="Redraw"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.redraw.type">
+					<input type="button" value="Upload Config"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.upload.config">
+					<input type="button" value="Toggle Keys and Values"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.toggle.keys">
+					<input type="button" value="Toggle Preview mode"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.toggle.grid">
+					<input type="button" value="Move content to upper left corner"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.move.region">
+				</td>
+
+			</tr>
+
+			<tr>
+				<td attachmentValue="hidden">
+					Default Background color <span>
+						<input type="color" value="#ff0000"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.default.background.color">
+					</span>
+
+					Default Font color <span>
+						<input type="color" value="#ffffff"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.default.font.color">
+					</span>
+
+					Selected Region color <span>
+						<input type="color" value="#0000ff"
+							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.default.border.select.color">
+					</span>
+				</td>
+
+				<td attachmentValue="!hidden">
+					Current Attachment:
+					<select name=""
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.attachment.path.current">
+						<option value="Test">Test</option>
+					</select>
+				</td>
+
+				<td class="rightPosition">
+					Current Type:
+					<select name=""
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.type.current">
+						<option value="Test">Test</option>
+						<option value="Value">Value</option>
+					</select>
+				</td>
+			</tr>
+
+		</table>
+
+		<hr>
+
+	</div>
+
+	<div class="configuratorUI preview">
+
+	</div>
+
+	<div class="configuratorUI body">
+
+		<hr attachmentValue="hidden">
+
+		<table class="configuratorUI" attachmentValue="hidden">
+			<tr>
+
+				<td style="width: 16.5%" class="showBorder">
+
+					<table class="configuratorUI">
+						<tr>
+							<td>
+								<b style="font-size: 200%">
+									Editor
+								</b>
+							</td>
+						</tr>
+						<tr>
+							<!--Blank-->
+						</tr>
+						<tr>
+							<td>
+								Current Mode:
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label
+									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.0">Region
+									Create</label>
+								<input type="radio" checked="checked" value="0"
+									name="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.0">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label
+									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.1">Region
+									Select</label>
+								<input type="radio" value="1"
+									name="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.1">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label
+									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.2">Region
+									Delete</label>
+								<input type="radio" value="2"
+									name="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.2">
+							</td>
+						</tr>
+					</table>
+
+				</td>
+
+				<td style="width: 66%" class="showBorder">
+
+					<table class="configuratorUI regionDataUI"
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.table">
+						<tr>
+							<td style="font-size: 200%">
+								<b>
+									Region View:
+								</b>
+								<span
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.id">
+									{{RegionID}}
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<!--Blank-->
+						</tr>
+						<tr>
+							<td>
+								Background-Color
+								<input type="color" name=""
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.background.color">
+							</td>
+							<td>
+								Text-Color
+								<input type="color" name=""
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.text.color">
+							</td>
+							<td>
+								Width
+								<input type="number" name="" min="1"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.size.width"
+									style="width: 20%">
+								Height
+								<input type="number" name="" min="1"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.size.height"
+									style="width: 20%">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Font Size
+								<input type="number" name="" min="0" style="width: 24%" ;
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.text.size">
+							</td>
+							<td>
+								Text Binding
+								<select name=""
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.text.position">
+									<option value="left">left</option>
+									<option value="center">center</option>
+									<option value="right">right</option>
+								</select>
+							</td>
+							<td>
+								Pos-X
+								<input type="number" name="" min="0"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.position.x"
+									style="width: 20%">
+								Pos-Y
+								<input type="number" name="" min="0"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.position.y"
+									style="width: 20%">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label
+									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.border">Borderless</label>
+								<input type="checkbox" name=""
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.border">
+							</td>
+							<td>
+								Text Vertical
+								<select name=""
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.text.vertical.position">
+									<option value="top">top</option>
+									<option value="middle">middle</option>
+									<option value="bottom">bottom</option>
+								</select>
+							</td>
+							<td>
+								<label
+									title="Only available if the width of the region is the same as the full configuration. The actions of this setting will not be applied to the UI, while inside the Editor."
+									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.dynamic.height">
+									Dynamic Height:
+								</label>
+								<input type="checkbox" name=""
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.dynamic.height">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								Text:
+								<input style="width: 90%" type="text" name="" autocomplete="off"
+									placeholder="Enter Content of the Region . . ."
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.text">
+							</td>
+
+							<td>
+								<label
+									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.tooltip">Tooltip:</label>
+								<input type="text" placeholder="Enter Tooltip . . ." autocomplete="off"
+									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.view.region.tooltip">
+							</td>
+
+						</tr>
+
+					</table>
+
+				</td>
+
+			</tr>
+		</table>
+
+		<div id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.keys.table"
+			style="display: block; overflow: auto; max-width: 1130px;" attachmentValue="hidden">
+			<hr>
+			<table class="hidden configuratorUI solidBlackBorder">
+				<tr>
+					<td>
+						Test
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="rightPosition">
+			<input type="button" value="Cancel"
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.button.cancel">
+			<input type="button" value="Toggle Fullscreen"
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.button.fullscreen">
+			<input type="button" value="Download"
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.button.download">
+			<input type="button" value="Save"
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.button.save">
+		</div>
+
+		<br><br>
+
+	</div>
+</div>

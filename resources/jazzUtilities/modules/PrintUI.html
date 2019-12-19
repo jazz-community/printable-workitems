@@ -1,0 +1,95 @@
+<div class="content">
+	<p>
+		Setup in order to Print
+
+		<input type="button" value=" Go to bottom " style="float: right"
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.bottom">
+
+	</p>
+
+	<div style="max-height: 150px; overflow-y: auto; width: 100%;border: 1px solid black">
+		<div
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.query.select">
+			No Query or Plan selected
+		</div>
+	</div>
+
+	<div style="margin: 5px 5px 0px 5px;">
+
+		<input
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.query.load.predefined"
+			type="button" value=" Load Predefined Query ">
+
+		<input
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.query"
+			type="button" value=" Select Query ">
+
+		<input
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.plan.select"
+			type="button" value=" Select Plan ">
+
+		<div style="float: right;">
+			<input
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.query.select.allChecked"
+				type="button" value=" Select All ">
+			<input
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.query.select.allUnChecked"
+				type="button" value=" Deselect All ">
+			<input
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.query.select.allToggle"
+				type="button" value=" Toggle All ">
+
+			<input
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.plan.select.allRanked"
+				type="button" value=" Select Ranked " title="Only available if a Plan is selected">
+
+			<input
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.query.select.allAdvanced"
+				type="button" value=" Advanced Selection ">
+		</div>
+	</div>
+
+	<hr>
+
+	<div style="display: flex">
+		<div
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.holder.table">
+			<table
+				id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.table"
+				class="workitemTable"></table>
+		</div>
+	</div>
+
+	<hr>
+
+	<div style="float: right;">
+
+		<label title="This does not effect the content of the Region ( Font-Size, Image-Size, . . . )"
+			for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.select.pageOptimize">
+			Config Print Size:
+		</label>
+
+		<select
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.select.pageOptimize">
+			<option value="" default>Default</option>
+			<option value='{"width":"185mm"}'>Optimized - A4 Portrait</option>
+			<option value='{"width":"290mm"}'>Optimized - A4 Landscape</option>
+			<option value='{"width":"290mm"}'>Optimized - A3 Portrait</option>
+			<option value='{"width":"395mm"}'>Optimized - A3 Landscape</option>
+		</select>
+
+		<input
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.redraw"
+			type="button" value=" Reload Last Query " title="Rerun the last Query which was executed">
+
+		<input
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.print"
+			type="button" value=" Print Workitem(s) "
+			title="Print the Workitem (Hold 'Alt' in order to disable auto. printing and closing)">
+
+		<input type="button" value=" Close "
+			id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemPrintProvider.ui.button.close">
+
+	</div>
+
+</div>

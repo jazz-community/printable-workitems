@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?><!-- was 3.4 originally -->
+<plugin>
+
+    <!-- Viewlets and categories-->
+    <extension
+            point="com.ibm.team.dashboard.common.viewlets">
+        <category
+                id="com.siemens.bt.jazz.viewlet.category.btaddons"
+                name="Project/Team/WorkItems"> <!--change this to have widget under different category-->
+        </category>
+        <viewlet
+                allow-remote="true"
+                closable="true"
+                collapsable="true"
+                dynamic-title="true"
+                editable="false"
+                gadgetable="true"
+                icon="resources/images/teamarea_obj.gif"
+                id="com.siemens.bt.jazz.viewlet.printableworkitems"
+                title="Printable Workitems"
+                widget="com.siemens.bt.jazz.viewlet.printableworkitems.Workitem"
+                version="1.1">
+			<preference-def
+                    default-value=""
+                    id="useWorkitemUUID"
+                    name="Use Workitem ID"
+					required="true"
+                    type="string">
+                <description>
+                   Workitem UUID to be used.
+                </description>
+            </preference-def>
+			<preference-def
+                    default-value="false"
+                    id="useDetailedChildren"
+                    name="Use detailed linked Items"
+					required="true"
+                    type="boolean">
+                <description>
+                   Should a detailed linked Items be loaded
+                </description>
+            </preference-def>
+			<preference-def
+					default-value='[{"type":"*","config":{"width":24,"height":15},"values":[]}]'
+                    id="useConfiguration"
+                    name="Use Configuration"
+					required="true"
+                    type="custom">
+                <description>
+                   Configuration to be used.
+                </description>
+            </preference-def>
+			<preference-def
+					default-value=''
+                    id="useExternalConfiguration"
+                    name="Use Process Attachment as Configuration"
+					required="false"
+                    type="hidden">
+                <description>
+                   Name of the Process Attachment to be used.
+                </description>
+            </preference-def>
+			<preference-def
+					default-value='false'
+					id="checkExternalConfiguration"
+					name="Use Process Attachment as Configuration"
+					required="true"
+					type="hidden">
+				<description>
+					Should any Process Attachment should be used
+				</description>
+			</preference-def>
+			<preference-def
+					default-value=''
+                    id="predefineQuery"
+                    name="Predefine a Query"
+					required="false"
+                    type="custom">
+                <description>
+                   Querry to be used.
+                </description>
+            </preference-def>
+        </viewlet>
+        <viewlet-entry
+                category="com.siemens.bt.jazz.viewlet.category.btaddons"
+                id="com.siemens.bt.jazz.viewlet.printableworkitems.entry.Workitem"
+                icon="resources/images/teamarea_obj.gif"
+                title="Printable Workitems"
+                non-jts="true"
+                repo-only="true"
+                preview="resources/images/PreviewWithTopPrintable.png"
+                viewlet-id="com.siemens.bt.jazz.viewlet.printableworkitems">
+            <description>
+                The 'Printable WorkItems' widget shows a defined Workitem formated, which can by defined by the configuration
+            </description>
+        </viewlet-entry>
+    </extension>
+
+    <!-- CSS binding -->
+    <extension point="net.jazz.ajax.cssBindingSets">
+        <cssBindingSet id="com.siemens.bt.jazz.viewlet.printableworkitems.css.bindings" path="/templates/">
+            <cssBinding jsModule="com.siemens.bt.jazz.viewlet.printableworkitems.Workitem">
+                <cssModule path="Workitem.css"/>
+            </cssBinding>
+        </cssBindingSet>
+    </extension>
+
+    <!-- Web bundle marker
+    <prerequisites>
+            <requiredWebBundle id="net.jazz.ajax"/>
+            <requiredWebBundle id="net.jazz.web.ui"/>
+        </prerequisites> -->
+    <extension
+            point="net.jazz.ajax.webBundles">
+    </extension>
+</plugin>
