@@ -155,21 +155,9 @@ table.workitemTable.border {
 }
 
 .workitemTable td .textHolder .textContainer .textDisplay a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: inherit;
 	font-weight: bold;
-}
-
-.workitemTable td .textHolder .textContainer .textDisplay a::before,
-table.configuratorUI.solidBlackBorder > tr > td > a::before
-{
-	content: '[';
-}
-
-.workitemTable td .textHolder .textContainer .textDisplay a::after,
-table.configuratorUI.solidBlackBorder > tr > td > a::after
-{
-	content: ']';
 }
 
 table.configuratorUI {

@@ -8,6 +8,7 @@
 /com.siemens.bt.jazz.viewlet.printableworkitems*.zip
 deployment-properties.ini
 dist/
+build/*.js
 jbe-build-wrapper.xml
 node_modules/
 resouces/jazzUtilities/modules/build/*.js

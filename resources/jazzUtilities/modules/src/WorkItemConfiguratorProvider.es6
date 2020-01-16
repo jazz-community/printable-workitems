@@ -76,7 +76,7 @@ define([
 		getLabel: function (value) {
 
 			if (this.context.checkExternalConfiguration && this.context.useExternalConfiguration !== "") {
-				return "Config is loaded externally";
+				return "Config from process attachment";
 			} else {
 				return this.context.useConfiguration === null ? 'Config not loaded yet' : `Found ${JSON.parse(this.context.useConfiguration).length} Config(s)`;
 			}
@@ -158,13 +158,13 @@ define([
 
 			this.currentSelectedRegion = null;
 
-			this.currentEditorStatus = this.currentEditorStatusEnum.region_create;
+			this.currentEditorStatus = this.currentEditorStatusEnum.region_select;
 
 			this._generateConfiguratorUI();
 
 			domClass.add(this.getTemplateDOMElementByID("view\\.table"), "hidden");
 
-			this.getTemplateDOMElementByID("data\\.config\\.location").value = this.checkExternalConfiguration ? "attachment" : "workitem";
+			this.getTemplateDOMElementByID("data\\.config\\.location").value = this.checkExternalConfiguration ? "attachment" : "widget";
 
 		},
 
@@ -209,7 +209,6 @@ define([
 									this.useExternalConfiguration
 							);
 
-							swal.close();
 						} else {
 
 							if (successful) {
@@ -226,7 +225,7 @@ define([
 			} else {
 
 				this.currentConfigurationID = 0;
-				this.currentEditorStatus = this.currentEditorStatusEnum.region_create;
+				this.currentEditorStatus = this.currentEditorStatusEnum.region_select;
 
 				if (this.externalCurrentConfiguration != null) {
 					this.currentConfiguration = this.externalCurrentConfiguration;
@@ -342,7 +341,7 @@ define([
 		 * @default null
 		 * 
 		 * @param {String} backColor The color which will get used for the background of the region
-		 * @default #ff0000
+		 * @default undefined
 		 * 
 		 * @param {Number} fontSize The size of the font for the region
 		 * @default 10
@@ -357,15 +356,15 @@ define([
 		 * @default false
 		 * 
 		 * @param {String} textColor The color which the text will use
-		 * @default #ffffff
+		 * @default undefined
 		 */
-		_addNewRegion: function (start, end, regionid = null, textContent = null, backColor = "#ff0000", fontSize = 10, textBinding = "left", textVertical = "top", borderless = false, textColor = "#ffffff") {
+		_addNewRegion: function (start, end, regionid = null, textContent = null, backColor = undefined, fontSize = 10, textBinding = "left", textVertical = "top", borderless = false, textColor = undefined) {
 
-			if (backColor == "#ff0000") {
+			if (backColor == undefined) {
 				backColor = this.getTemplateDOMElementByID("default\\.background\\.color").value;
 			}
 
-			if (textColor == "#ffffff") {
+			if (textColor == undefined) {
 				textColor = this.getTemplateDOMElementByID("default\\.font\\.color").value;
 			}
 
@@ -746,13 +745,11 @@ define([
 			this.getHolderElement().querySelectorAll(":scope > .workitemTable > tr > td").forEach(element => {
 
 				on(element, mouse.enter, (evt) => {
-					//domStyle.set(element, "backgroundColor", "yellow");
 					domClass.add(element, "backgroundYellow");
 					self._updateCurrentPositionInTable(element.getAttribute("tableid"));
 				});
 
 				on(element, mouse.leave, (evt) => {
-					//domStyle.set(element, "backgroundColor", "");
 					domClass.remove(element, "backgroundYellow");
 				});
 
@@ -766,9 +763,14 @@ define([
 							domClass.add(element, "firstSelectedID");
 						} else {
 
+							const positionID = element.getAttribute('tableid');
+							if (self._firstClickedID == positionID && !event.ctrlKey) {
+								return;
+							}
+
 							self._addNewRegion(
 								self.calculatePositionByID(self._firstClickedID),
-								self.calculatePositionByID(element.getAttribute('tableid'))
+								self.calculatePositionByID(positionID)
 							);
 
 						}
@@ -776,7 +778,6 @@ define([
 
 						if (element.hasAttribute("regionid")) {
 							self._updateSelectedRegion(element.getAttribute('regionid'));
-
 						}
 
 					} else if (self.verifyCurrentEditorStatus(self.currentEditorStatusEnum.region_delete)) {
@@ -991,7 +992,6 @@ define([
 			on(this.getTemplateDOMElementByID("data\\.config\\.location"), "change", (evt) => {
 				self.checkExternalConfiguration = evt.target.value === "attachment";
 				self.configLocationChangedRedraw();
-
 			});
 
 			on(this.getTemplateDOMElementByID("attachment\\.path\\.current"), "change", (evt) => {
@@ -1005,7 +1005,7 @@ define([
 
 			on(this.getTemplateDOMElementByID("toggle\\.keys"), "click", (evt) => {
 
-				let tableElement = self.getTemplateDOMElementByID("keys\\.table").querySelector(":scope > table")
+				let tableElement = self.getTemplateDOMElementByID("keys\\.table").querySelector(":scope > table");
 
 				tableElement.innerHTML = "";
 
@@ -1234,6 +1234,25 @@ define([
 
 				});
 
+			});
+
+			on(this.getTemplateDOMElementByID("processAttachment\\.copy\\.widget"), "click", (evt) => {
+				swal({
+					title: "Are you sure?",
+					text: "The current Widget configuration will be overwritten. This action can only be undone by closing the Dialog without saving the Configuration. Do you want to continue ?",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true
+				}).then((willOverwrite) => {
+					if (willOverwrite) {
+						self.checkExternalConfiguration = false;
+						self.externalCurrentConfiguration = JSON.parse(JSON.stringify(self.currentConfiguration));
+						self.getTemplateDOMElementByID("data\\.config\\.location").value = "widget";
+						self.configLocationChangedRedraw();
+					} else {
+						swal("Canceled", "Action was canceled", "info");
+					}
+				});
 			});
 
 			/** The Change Events . . . */
@@ -1753,11 +1772,12 @@ define([
 
 						this._updateTypes();
 						this._updateSelectedRegion(null);
-						//this.redrawPanelContent();
 
 						this.currentEditorStatus = this.currentEditorStatusEnum.region_select;
 
-						swal.close();
+						setTimeout(() => {
+							swal.close();
+						}, 500);
 
 					} else {
 						swal("Request Error", message, "error");

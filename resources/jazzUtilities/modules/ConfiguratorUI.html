@@ -46,7 +46,7 @@
 						Config from: </label>
 					<select
 						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.data.config.location">
-						<option value="workitem">Workitem</option>
+						<option value="widget">Widget</option>
 						<option value="attachment">Process Attachment</option>
 					</select>
 
@@ -91,12 +91,12 @@
 			<tr>
 				<td attachmentValue="hidden">
 					Default Background color <span>
-						<input type="color" value="#ff0000"
+						<input type="color" value="#ffffff"
 							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.default.background.color">
 					</span>
 
 					Default Font color <span>
-						<input type="color" value="#ffffff"
+						<input type="color" value="#000000"
 							id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.default.font.color">
 					</span>
 
@@ -107,11 +107,16 @@
 				</td>
 
 				<td attachmentValue="!hidden">
+
 					Current Attachment:
 					<select name=""
 						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.attachment.path.current">
 						<option value="Test">Test</option>
 					</select>
+
+					<input type="button" value=" Copy to Widget configuration "
+						id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.processAttachment.copy.widget">
+
 				</td>
 
 				<td class="rightPosition">
@@ -164,7 +169,7 @@
 								<label
 									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.0">Region
 									Create</label>
-								<input type="radio" checked="checked" value="0"
+								<input type="radio" value="0"
 									name="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio"
 									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.0">
 							</td>
@@ -174,7 +179,7 @@
 								<label
 									for="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.1">Region
 									Select</label>
-								<input type="radio" value="1"
+								<input type="radio" value="1" checked="checked"
 									name="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio"
 									id="com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.WorkItemConfiguratorProvider.ui.radio.option.1">
 							</td>
