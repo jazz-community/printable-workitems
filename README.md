@@ -37,6 +37,8 @@ Deploy just like any other update site:
 
 For more details please take a look in the [Wiki](../../wiki)
 
+Also, check out the [samples](https://github.com/jazz-community/printable-workitems/tree/master/samples) folder for some example configurations to get you started.
+
 # About this Plug-In
 ## Contributing
 Please use the [Issue Tracker](../../issues) of this repository to report issues or suggest enhancements.
