@@ -1,6 +1,6 @@
 {
 	"name": "com.siemens.bt.jazz.viewlet.printableworkitems",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "The 'My Teams' widget shows the teams one is member of in the selected/active project area. It also provides the same functionality as the Teams widget.",
 	"scripts": {
 		"build": "npm run babel-compile && webpack --config ./webpack.config.js --mode production",

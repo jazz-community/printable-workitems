@@ -225,10 +225,13 @@ define([
 			} else {
 
 				this.currentConfigurationID = 0;
+
 				this.currentEditorStatus = this.currentEditorStatusEnum.region_select;
+				this.getTemplateDOMElementByID("radio\\.option\\." + this.currentEditorStatus).checked = true;
 
 				if (this.externalCurrentConfiguration != null) {
 					this.currentConfiguration = this.externalCurrentConfiguration;
+					this._recalculateRegionIDs();
 				}
 
 				this._updateSelectedRegion(null);
