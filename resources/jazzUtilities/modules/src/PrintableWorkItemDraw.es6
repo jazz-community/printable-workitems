@@ -36,7 +36,7 @@ define(["dojo/_base/declare",
 		 * All the HTML-Tags, which are allowed by the System
 		 * to get displayed
 		 */
-		GLOBAL_HTML_ALLOWED_TAGS: "<b><i><u><p><br><a><s><div><span><hr><synthetic><ul><li><ol>",
+		GLOBAL_HTML_ALLOWED_TAGS: "<b><i><u><p><br><a><s><div><span><hr><synthetic><ul><li><ol><svg><g><path>",
 
 		constructor: function (parentWidget) {
 			this.parentWidget = parentWidget;
@@ -1212,8 +1212,86 @@ define(["dojo/_base/declare",
 
 				});
 
+			} else if (previousValue.type === "toggle") {
+
+				this.taskScheduler.push(() => {
+					let contentHolderElement = this.parentWidget.getHolderElement().querySelector('[regionID="' + regionID + '"] > .textHolder > .textContainer > .textDisplay');
+
+					if (contentHolderElement == null) {
+						return;
+					}
+
+					contentHolderElement.innerHTML = "";
+
+					if (!previousValue.show) {
+						return;
+					}
+
+					let svgContainer = document.createElement('div');
+					const hidden = (previousValue.default && previousValue.default == "hidden");
+
+					svgContainer.classList.add(`rotate-z-${hidden ? '90' : '0'}`);
+					svgContainer.innerHTML = '<svg class="no-event" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="100%" height="100%" viewBox="0 0 284.929 284.929" style="enable-background:new 0 0 284.929 284.929;"	 xml:space="preserve"><g>	<path d="M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441		L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082		c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647		c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z"/></g></svg>';
+
+					contentHolderElement.appendChild(svgContainer);
+
+					if (this.ignoreDynamicValues || !Boolean(previousValue.toggle)) {
+						return;
+					}
+
+					let self = this;
+
+					svgContainer.setAttribute('toggle', previousValue.toggle);
+
+					svgContainer.classList.add("pointer");
+					svgContainer.addEventListener('click', (event) => {
+						let sourceElement = event.srcElement;
+						const isVisible = sourceElement.classList.contains('rotate-z-90');
+
+						sourceElement.getAttribute('toggle').split(',').forEach((id) => {
+							if (Number(id) != NaN) {
+								self._setRegionVisibilityByID(id, isVisible);
+							}
+						});
+
+						sourceElement.classList.toggle('rotate-z-0');
+						sourceElement.classList.toggle('rotate-z-90');
+					});
+
+					if (hidden) {
+						previousValue.toggle.split(',').forEach((id) => {
+							if (Number(id) != NaN) {
+								self._setRegionVisibilityByID(id, false);
+							}
+						});
+					}
+
+					if (previousValue.blink) {
+						const color = previousValue.blink.replace('-', '').replace('_', '#');
+						const parentHolder = contentHolderElement.parentNode.parentNode.parentNode;
+
+						if (parentHolder) {
+							parentHolder.style.setProperty('--blink-color', color);
+							parentHolder.classList.add('blink');
+						}
+					}
+
+				});
+
 			}
 
+		},
+
+		/**
+		 * Set the visibility from a Region
+		 * 
+		 * @param {String} region Id of the region
+		 * @param {Boolean} isVisible Should the Region be visible or not
+		 */
+		_setRegionVisibilityByID: function (region, isVisible) {
+			this.parentWidget.getHolderElement().querySelectorAll(`[regionID='${region}']`).forEach((entry) => {
+				entry.style.display = isVisible ? 'table-cell' : 'none';
+			});
 		},
 
 		/**

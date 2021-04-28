@@ -21,9 +21,10 @@
 	},
 	"devDependencies": {
 		"@actions/core": "^1.2.3",
-		"@babel/cli": "^7.8.4",
-		"@babel/core": "^7.8.7",
-		"@babel/preset-env": "^7.8.7",
+		"@babel/cli": "^7.13.16",
+		"@babel/compat-data": "^7.13.15",
+		"@babel/core": "^7.13.16",
+		"@babel/preset-env": "^7.13.15",
 		"disable-output-webpack-plugin": "^1.0.1",
 		"remove-files-webpack-plugin": "^1.4.0",
 		"typescript": "^3.8.3",

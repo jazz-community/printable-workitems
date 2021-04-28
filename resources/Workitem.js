@@ -7,6 +7,7 @@ define(["dojo/_base/declare",
 	"./jazzUtilities/modules/BabelPolyfill",
 	"./jazzUtilities/modules/build/ProcessAttachments",
 	"dojo/domReady!",
+	"com.ibm.team.dashboard.web.ui.Viewlet",
 	"com.ibm.team.apt.web.ui.internal.viewlet.PlanChooserWidget"
 ], function (declare, require, PrintableWorkItemDraw, WorkItemConfiguratorProvider, WorkItemPrintProvider, PredefineQueryProvider, BabelPolyfill, ProcessAttachments) {
 
@@ -90,7 +91,6 @@ define(["dojo/_base/declare",
 			subElement.style.background = "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAABnUlEQVR42o2S3y+CURjHz1/lP3ERhgsXbF3YjBmWjQ2zMbHlQsamDMn8qgzvEsXURbZy49cylAm9Vkll+zrP6bxJypzts+f7PM/3e96L8zJWcoLHs6gE+88JeOfxkftEtoQzWz38R3MIHM3/fYnXbUEqky+SznziPjiLi8M+cQntq4aVvSWoqTzUNCeVk+SRoBlH2V+uHnY41xB/y8FoPcGI2YOeiR3oB1fR2LUg5g7X2s/wouMcnVMe1NROYnVzG9GXLB6I10KlPiq1ne/JR37KMRLJ9LvAYt9B5Clb8cu3fE57zUs51mF0I64mEU8kYV5ScBX7wCXnKiqhPpoR2ryscF8Kz9zfYTwAax/bRySmIvKoYtrqgcl6iGmLR2iqJsIq4Zp8RPu4AqYf3UXo+hnhmwKhcq4lZXPKsdZhF3zhR04MvpCsopeENEr2XLcNOcFaBrbgPL2Di+MswyW4/9b+b1/L4DZYc/86iCZZmw0Sre/fKOx+zdch3rmh1w7DjB8Gs0TTM4GKmvzinbUfRddtQx1H94uVsmorBr8A2cFbmluSGQAAAAAASUVORK5CYII=')";
 
 			var subImageElement = document.createElement("img");
-			subImageElement.src = "../dojo/resources/blank.gif";
 
 			subElement.appendChild(subImageElement);
 			element.appendChild(subElement);
