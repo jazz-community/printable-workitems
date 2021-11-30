@@ -9,7 +9,7 @@ define(["dojo/_base/declare",
 		activeConfigurationWidth: 5,
 		// Map with all the keys and values for the translator
 		keyValueMap: [],
-		predefinedAttributes: null,
+		predefinedAttributes: [],
 
 		// All Tasks which need to be run, before everything is done
 		taskScheduler: [],
@@ -84,7 +84,7 @@ define(["dojo/_base/declare",
 
 			this.globalChildCheckingDone = false;
 
-			this.predefinedAttributes = _predefinedAttributes;
+			this.predefinedAttributes = !_predefinedAttributes ? [] : _predefinedAttributes;
 
 			if (!skipWebKeysIfNotEmpty || (skipWebKeysIfNotEmpty && this.keyValueMap.length === 0)) {
 
@@ -199,7 +199,6 @@ define(["dojo/_base/declare",
 			}).bind(this));
 
 		},
-
 
 		/**
 		 * Process the Data which was loaded from the Jazz server
@@ -383,24 +382,24 @@ define(["dojo/_base/declare",
 
 			}
 
+			//apply all current Custom Attributes
+			this._applyCustomCurrentAttributeToPredefined();
+
 			//apply all the Custom Attributes
-			if (this.predefinedAttributes != null) {
+			this.predefinedAttributes.forEach(element => {
 
-				this.predefinedAttributes.forEach(element => {
+				let value = document.createElement("value");
+				let label = document.createElement("label");
 
-					let value = document.createElement("value");
-					let label = document.createElement("label");
+				label.innerText = element.value;
+				value.appendChild(label);
 
-					label.innerText = element.value;
-					value.appendChild(label);
+				this.keyValueMap.push([
+					element.key,
+					value
+				]);
 
-					this.keyValueMap.push([
-						element.key,
-						value
-					]);
-
-				});
-			}
+			});
 
 			this.globalChildCheckingDone = true;
 
@@ -412,6 +411,61 @@ define(["dojo/_base/declare",
 				}
 			}
 
+		},
+
+		/**
+		 * Get the current user which is logged in
+		 */
+		_getCurrentUser: function () {
+			return com.ibm.team.repository.web.client.internal.AUTHENTICATED_CONTRIBUTOR;
+		},
+
+		/**
+		 * Apply all the Data for current values
+		 *  - User
+		 *  - Date
+		 */
+		_applyCustomCurrentAttributeToPredefined: function () {
+
+			// Add Current User
+			const userDataKeys = ['archived', 'emailAddress', 'immutable', 'itemId', 'modified', 'name', 'stateId', 'userId'];
+
+			let currentUserData = this._getCurrentUser();
+			if (currentUserData) {
+				userDataKeys.forEach(key => {
+					this._addPredefinedKeyValue(`current.user.${key}`, currentUserData[key]);
+				})
+			}
+			else {
+				console.warn("Failed to load the current user");
+			}
+
+			// Add Current Date
+			const now = Date.now();
+			const currentDate = new Date(now);
+			const dateString = currentDate.toUTCString();
+
+			this._addPredefinedKeyValue('current.date', dateString);
+			this._addPredefinedKeyValue('current.date.f.g.time', this._formateDate(now, 'hh\:mnmn\:ss'));
+
+			this._addPredefinedKeyValue('current.date.f.g.date', this._formateDate(now, 'dd/mm/yyyy'));
+			this._addPredefinedKeyValue('current.date.f.us.date', this._formateDate(now, 'mm/dd/yyyy'));
+
+			this._addPredefinedKeyValue('current.date.l.time', currentDate.toTimeString());
+			this._addPredefinedKeyValue('current.date.l.date', currentDate.toDateString());
+		},
+
+		/**
+		 * Add new Key and Value to the predefined Attribute list
+		 * 
+		 * @param {string} key 
+		 * @param {string} value 
+		 */
+		_addPredefinedKeyValue: function (key, value) {
+			this.predefinedAttributes.push({
+				key: key,
+				value: value
+			});
 		},
 
 		/**
