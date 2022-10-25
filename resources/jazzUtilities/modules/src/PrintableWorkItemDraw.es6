@@ -28,7 +28,11 @@ define(["dojo/_base/declare",
 
 		dynamicVariableCounter: [],
 
+		toggleApplyHideSet: null,
+
 		_pageSizeOptimize: null,
+
+		_months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
 		/**
 		 * @static final
@@ -84,6 +88,8 @@ define(["dojo/_base/declare",
 
 			this.globalChildCheckingDone = false;
 
+			this.toggleApplyHideSet = new Set();
+
 			this.predefinedAttributes = !_predefinedAttributes ? [] : _predefinedAttributes;
 
 			if (!skipWebKeysIfNotEmpty || (skipWebKeysIfNotEmpty && this.keyValueMap.length === 0)) {
@@ -135,10 +141,13 @@ define(["dojo/_base/declare",
 
 					this._applyDynamicHeights(updateTitle, configuration);
 
-				} else if (updateTitle) {
+				} else {
 
-					this.parentWidget._updateTitle();
+					if (updateTitle) {
+						this.parentWidget._updateTitle();
+					}
 
+					this.onFinishedDrawing();
 				}
 
 			}
@@ -1315,7 +1324,7 @@ define(["dojo/_base/declare",
 					if (hidden) {
 						previousValue.toggle.split(',').forEach((id) => {
 							if (Number(id) != NaN) {
-								self._setRegionVisibilityByID(id, false);
+								self.toggleApplyHideSet.add(id);
 							}
 						});
 					}
@@ -1456,12 +1465,20 @@ define(["dojo/_base/declare",
 			returnValue = returnValue.replace(/dd/gm, `${dateValue.getDate() < 10 ? "0" : ""}${dateValue.getDate()}`);
 			returnValue = returnValue.replace(/d/gm, dateValue.getDate());
 
+			// Temporary replace to not replace chars in the string of the month
+			returnValue = returnValue.replace(/mmmm/gm, '%____%');
+			returnValue = returnValue.replace(/mmm/gm, '%___%');
+
 			// IMPORTANT: MONTH IN JAVASCRIPT START WITH ZERO AS JANUARY !!!!!!!
 			returnValue = returnValue.replace(/mm/gm, `${dateValue.getMonth() < 9 ? "0" : ""}${dateValue.getMonth() + 1}`);
 			returnValue = returnValue.replace(/m/gm, dateValue.getMonth() + 1);
 
 			returnValue = returnValue.replace(/yyyy/gm, `${dateValue.getFullYear()}`);
 			returnValue = returnValue.replace(/yy/gm, `${String(dateValue.getFullYear()).slice(2)}`);
+
+			// Finally replace the temporary placeholder with the accrual value
+			returnValue = returnValue.replace(/%____%/gm, this._months[dateValue.getMonth()]);
+			returnValue = returnValue.replace(/%___%/gm, this._months[dateValue.getMonth()].substr(0, 3));
 
 			return returnValue;
 		},
@@ -2007,6 +2024,14 @@ define(["dojo/_base/declare",
 				this.parentWidget.updateTitle();
 			}
 
+		},
+
+		/**
+		 * Called when everything has finished drawing
+		 */
+		onFinishedDrawing: function () {
+			// Resolve all the toggle Regions which are hidden by default
+			this.toggleApplyHideSet.forEach(toggleID => this._setRegionVisibilityByID(toggleID, false));
 		},
 
 	});

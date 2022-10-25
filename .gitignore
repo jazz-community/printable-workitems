@@ -12,3 +12,4 @@ build/*.js
 jbe-build-wrapper.xml
 node_modules/
 resouces/jazzUtilities/modules/build/*.js
+.classpath
