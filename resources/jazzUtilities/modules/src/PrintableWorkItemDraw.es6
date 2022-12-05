@@ -462,6 +462,12 @@ define(["dojo/_base/declare",
 
 			this._addPredefinedKeyValue('current.date.l.time', currentDate.toTimeString());
 			this._addPredefinedKeyValue('current.date.l.date', currentDate.toDateString());
+
+			// Add Link to workitem and summary that is clickable
+			const workitemURL = `${this.parentWidget.webURL}/resource/itemName/com.ibm.team.workitem.WorkItem/${this._checkRegexAndTranslate('{{id}}')}`;
+
+			this._addPredefinedKeyValue('current.workitem.url', workitemURL);
+			this._addPredefinedKeyValue('current.workitem.linked_summary', `<a target="_blank" href="${workitemURL})">${this._checkRegexAndTranslate('{{summary}}')}</a>`);
 		},
 
 		/**
@@ -1341,6 +1347,44 @@ define(["dojo/_base/declare",
 
 				});
 
+			} else if (previousValue.type === "linkRegionAttribute" && previousValue.location) {
+
+				this.taskScheduler.push(() => {
+
+					let contentHolderElement = this.parentWidget.getHolderElement().querySelector('[regionID="' + regionID + '"] > .textHolder > .textContainer');
+
+					if (!contentHolderElement) {
+						return;
+					}
+
+					contentHolderElement.setAttribute('href', this._checkRegexAndTranslate(`{{${previousValue.location}}}`));
+
+					if (previousValue.cursor) {
+						contentHolderElement.style.cursor = previousValue.cursor;
+					}
+
+					contentHolderElement.addEventListener('click', (event) => {
+
+						for (let i = 0; i < event.path.length; i++) {
+							const pathElement = event.path[i];
+
+							if (pathElement.classList.contains('textContainer')) {
+
+								const openURL = pathElement.getAttribute('href');
+
+								if (openURL) {
+									window.open(openURL, '_blank');
+								}
+
+								return;
+
+							}
+						}
+
+					});
+
+				});
+
 			}
 
 		},
@@ -1493,7 +1537,7 @@ define(["dojo/_base/declare",
 		 * @returns {String} The Formated URL as String in the HTML-Format
 		 */
 		_formateLink: function (keyWordContent, formatter) {
-			return `<a href="${keyWordContent}" target="_blank" rel="noopener noreferrer">${formatter}</a>`;
+			return `<a href="${keyWordContent ? keyWordContent : formatter}" target="_blank" rel="noopener noreferrer">${formatter}</a>`;
 		},
 
 		/**
@@ -1550,10 +1594,11 @@ define(["dojo/_base/declare",
 					let _elementLinkNodeOffset = Number(elementLinkNode.querySelector("offset").textContent);
 					let _elementLinkNodeLength = Number(elementLinkNode.querySelector("length").textContent);
 					let _elementLinkNodeWebUri = elementLinkNode.querySelector("weburi").textContent;
+					let _elementLinkNodeUri = elementLinkNode.querySelector("uri").textContent;
 
 					// Replace the content of the text with the links
 					_returnValue = _returnValue.substring(0, _elementLinkNodeOffset) +
-						"<a href='" + _elementLinkNodeWebUri + "' target='_blank' rel='noopener noreferrer'>" +
+						"<a href='" + (_elementLinkNodeWebUri ? _elementLinkNodeWebUri : _elementLinkNodeUri) + "' target='_blank' rel='noopener noreferrer'>" +
 						_returnValue.substring(_elementLinkNodeOffset, (_elementLinkNodeOffset + _elementLinkNodeLength)) + "</a>" +
 						_returnValue.substring(_elementLinkNodeOffset + _elementLinkNodeLength);
 				});
