@@ -3,7 +3,7 @@ define([
 	'require',
 	'./../DojoSweetAlert',
 	'com.ibm.team.apt.web.ui.internal.editor.config.PlanModeClient',
-	'com.ibm.team.apt.web.ui.internal.viewlet.PlanChooserWidget'
+	'com.ibm.team.apt.web.ui.internal.viewlet.PlanChooserWidget',
 ], function (declare, require, DojoSweetAlert, PlanModeClient, PlanChooserWidget) {
 
 	var DojoSweetAlert = com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.DojoSweetAlert;
@@ -35,7 +35,6 @@ define([
 
 					new PlanChooserWidget().createChooser(
 						function (result1, result2) {
-
 							var team = com.ibm.team;
 							var apt = team.apt;
 							var web = apt.web;
@@ -50,8 +49,7 @@ define([
 							var client2 = web.client;
 							var PlanningClient2 = client2.PlanningClient2;
 
-							var shared = apt.shared;
-							var Future = shared.client.internal.util.Future;
+							var Future = client2.internal.util.Future;
 
 							var onPlanModes = new Future();
 							onPlanModes.setErrCallback(function (error) {

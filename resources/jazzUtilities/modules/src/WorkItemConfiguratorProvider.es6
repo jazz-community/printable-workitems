@@ -255,9 +255,6 @@ define([
 				}
 
 			});
-
-			this._printableWorkitemPanelDialog._dialog.updatePosition();
-
 		},
 
 		/**
@@ -624,8 +621,6 @@ define([
 		 * @override PrintableWorkItemDraw._updateTitle
 		 */
 		_updateTitle: function () {
-			this._printableWorkitemPanelDialog._dialog.updatePosition();
-
 			this._updateTypes();
 
 			this._bindEventsToTable();
@@ -1046,10 +1041,6 @@ define([
 
 
 				domClass.toggle(tableElement, "hidden");
-
-				self._printableWorkitemPanelDialog._dialog.updatePosition();
-
-
 			});
 
 			on(this.getTemplateDOMElementByID("toggle\\.grid"), "click", (evt) => {

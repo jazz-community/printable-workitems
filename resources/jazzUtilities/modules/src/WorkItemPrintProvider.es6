@@ -228,13 +228,11 @@ define([
 
 				new WorkItemPlanDialog().getListFromPlan().then(
 					function (data) {
-
-						mainContainer._printableWorkitemPanelDialog._dialog._primaryHeaderText.innerText = `${mainContainer._globalDialogPrimaryTitle}, Plan is selected`;
+						mainContainer._updateDialogHeader(`${mainContainer._globalDialogPrimaryTitle}, Plan is selected`);
 
 						mainContainer._handleFoundItemList(
 							data
 						);
-
 					}, function (error) {
 						console.warn(error);
 					}
@@ -365,6 +363,17 @@ define([
 		},
 
 		/**
+		 * Update the header of the current dialogbox
+		 * 
+		 * @param {String} content The text which should be displayed as the header
+		 */
+		_updateDialogHeader: function (content) {
+			if (this._printableWorkitemPanelDialog && this._printableWorkitemPanelDialog._dialog && this._printableWorkitemPanelDialog._dialog._heading) {
+				this._printableWorkitemPanelDialog._dialog._heading.innerText = content;
+			}
+		},
+
+		/**
 		 * Create a configuration as table, and places it in the printing queue
 		 * 
 		 * @param {String} _id The ID of the Workitem where the configuration should get applied
@@ -396,9 +405,6 @@ define([
 				// Custom Attribute
 				_customAttribute
 			);
-
-			this._printableWorkitemPanelDialog._dialog.updatePosition();
-
 		},
 
 		/**
@@ -411,7 +417,7 @@ define([
 
 			this._globalLastQueryDto = queryDto;
 
-			this._printableWorkitemPanelDialog._dialog._primaryHeaderText.innerText = `${this._globalDialogPrimaryTitle}, Query: ${queryDto.name}`;
+			this._updateDialogHeader(`${this._globalDialogPrimaryTitle}, Query: ${queryDto.name}`);
 
 			window.scrollTo(0, 0);
 
@@ -459,7 +465,6 @@ define([
 								swal.close();
 								window.scrollTo(0, 0);
 								holdElement.innerHTML = "No Items found with this Query";
-								mainContainer._printableWorkitemPanelDialog._dialog.updatePosition();
 								mainContainer.getTemplateDOMElementByID("holder\\.table").innerHTML = "";
 							}, 100);
 						}
@@ -475,7 +480,6 @@ define([
 							window.scrollTo(0, 0);
 							mainContainer.getTemplateDOMElementByID("query\\.select").innerHTML = "Can't resolve Query";
 							mainContainer.getTemplateDOMElementByID("holder\\.table").innerHTML = "";
-							mainContainer._printableWorkitemPanelDialog._dialog.updatePosition();
 						}, 100);
 					}
 				}
@@ -641,8 +645,6 @@ define([
 					element.checked ? "inline-table" : "none";
 
 			});
-
-			this._printableWorkitemPanelDialog._dialog.updatePosition();
 		},
 
 		/**
@@ -853,9 +855,7 @@ define([
 		 * @override PrintableWorkItemDraw._updateTitle
 		 */
 		_updateTitle: function () {
-			if (this._queryList.length === 0) {
-				this._printableWorkitemPanelDialog._dialog.updatePosition();
-			} else {
+			if (this._queryList.length !== 0) {
 				this._queryListID++;
 
 				if (this._queryList.length > this._queryListID) {
@@ -875,7 +875,6 @@ define([
 					}
 				} else {
 					swal.close();
-					this._printableWorkitemPanelDialog._dialog.updatePosition();
 					this._queryList = [];
 					this._queryListID = 0;
 				}

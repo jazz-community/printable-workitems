@@ -77,7 +77,7 @@ dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modul
 			// Create the dialog
 			this._dialog = new Dialog({
 				contentNode: this.domNode,
-				primaryTitle: _primaryTitle,
+				heading: _primaryTitle,
 				width: _width,
 				isClosable: true,
 				onClose: function () {
@@ -131,7 +131,7 @@ dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modul
 			}
 			this._styledBox = new jazz.ui.StyledBox({
 				closable: false,
-				primaryTitle: reportParam.getDisplayLabel(),
+				heading: reportParam.getDisplayLabel(),
 				secondaryTitle: (reportParam.isRequired() ? "<span class=\"requiredMarker\">*</span>" : ""),
 				contentNode: reportParam.domNode,
 				"class": "box-single",
@@ -149,10 +149,10 @@ dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modul
 		},
 
 		/*
-	 	 * @param Boolean show
-	 	 * 
-	 	 * @return void
-	 	 */
+		   * @param Boolean show
+		   * 
+		   * @return void
+		   */
 		showPreviewPane: function (show) {
 
 			if (show) {
