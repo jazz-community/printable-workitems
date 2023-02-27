@@ -28,6 +28,6 @@
 		"disable-output-webpack-plugin": "^1.0.1",
 		"remove-files-webpack-plugin": "^1.4.0",
 		"typescript": "^3.8.3",
-		"webpack-cli": "^3.3.11"
+		"webpack-cli": "^3.3.12"
 	}
 }
