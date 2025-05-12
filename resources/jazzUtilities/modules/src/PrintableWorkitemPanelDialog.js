@@ -1,4 +1,4 @@
-dojo.provide("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.build.PrintableWorkitemPanelDialog");
+dojo.provide("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.src.PrintableWorkitemPanelDialog");
 
 dojo.require("dojo.i18n");
 
@@ -6,14 +6,14 @@ dojo.require("jazz.ui.StyledBox");
 dojo.require("jazz.ui.Dialog");
 dojo.require("jazz.app.i18n");
 
-dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.build.PrintableWorkitemPanel");
+dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.src.PrintableWorkitemPanel");
 
 (function () {
 
 	var TrimStyles = jazz.ui.StyledBox.TrimStyles;
 	var Dialog = jazz.ui.Dialog;
 
-	dojo.declare("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.build.PrintableWorkitemPanelDialog", [dijit._Widget, dijit._Templated], {
+	dojo.declare("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.src.PrintableWorkitemPanelDialog", [dijit._Widget, dijit._Templated], {
 
 		templatePath: dojo.moduleUrl("com.siemens.bt.jazz.viewlet.printableworkitems", "jazzUtilities/modules/PrintableWorkitemPanelDialog.html"),
 		padding: "10px",
@@ -72,7 +72,8 @@ dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modul
 
 		},
 
-		showAsDialog: function (_primaryTitle, onCloseFunc, _width = "952px") {
+		showAsDialog: function (_primaryTitle, onCloseFunc) {
+			var _width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "952px";
 			var self = this;
 			// Create the dialog
 			this._dialog = new Dialog({
@@ -132,7 +133,7 @@ dojo.require("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modul
 			this._styledBox = new jazz.ui.StyledBox({
 				closable: false,
 				heading: reportParam.getDisplayLabel(),
-				secondaryTitle: (reportParam.isRequired() ? "<span class=\"requiredMarker\">*</span>" : ""),
+				secondaryTitle: reportParam.isRequired() ? "<span class=\"requiredMarker\">*</span>" : "",
 				contentNode: reportParam.domNode,
 				"class": "box-single",
 				trim: TrimStyles.BLUE_ALPHA_SHADOW,

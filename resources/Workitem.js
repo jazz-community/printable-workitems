@@ -1,11 +1,11 @@
 define(["dojo/_base/declare",
 	"require",
-	"./jazzUtilities/modules/build/PrintableWorkItemDraw",
-	"./jazzUtilities/modules/build/WorkItemConfiguratorProvider",
-	"./jazzUtilities/modules/build/WorkItemPrintProvider",
-	"./jazzUtilities/modules/build/PredefineQueryProvider",
+	"./jazzUtilities/modules/src/PrintableWorkItemDraw",
+	"./jazzUtilities/modules/src/WorkItemConfiguratorProvider",
+	"./jazzUtilities/modules/src/WorkItemPrintProvider",
+	"./jazzUtilities/modules/src/PredefineQueryProvider",
 	"./jazzUtilities/modules/BabelPolyfill",
-	"./jazzUtilities/modules/build/ProcessAttachments",
+	"./jazzUtilities/modules/src/ProcessAttachments",
 	"dojo/domReady!",
 	"com.ibm.team.dashboard.web.ui.Viewlet",
 	"com.ibm.team.apt.web.ui.internal.viewlet.PlanChooserWidget"
@@ -573,7 +573,7 @@ define(["dojo/_base/declare",
 			//use scope item name except if it is user(default minidash)
 			var _forcedTitle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-			var _translatedSummary = this.workItemDraw._checkRegexAndTranslate("{{summary}}");
+			var _translatedSummary = this._cleanStringForTitle(this.workItemDraw._checkRegexAndTranslate("{{summary}}"));
 
 			this.getSite().setTitle(
 				_forcedTitle == null ?
@@ -585,6 +585,34 @@ define(["dojo/_base/declare",
 			);
 
 		},
+
+		/**
+		 * Clean the String for the Title to make it more presentable in the Widget
+		 * @param {string} content The content which should get cleaned
+		 * @returns {string} The cleaned content
+		 */
+		_cleanStringForTitle: function (content) {
+			if (!content || typeof content !== "string") {
+				// If the content is empty or not a string, return an empty string
+				return "";
+			}
+
+			// Remove HTML tags and decode HTML entities
+			content = content.replace(/(<([^>]+)>)/ig, "");
+
+			// Decode HTML entities
+			content = content.replace(/&quot;/g, "\"");
+
+			content = content.replace(/&lt;/g, "<");
+			content = content.replace(/&gt;/g, ">");
+
+			content = content.replace(/&apos;/g, "'");
+			content = content.replace(/&nbsp;/g, " ");
+
+			content = content.replace(/&amp;/g, "&");
+
+			return content;
+		}
 
 	});
 

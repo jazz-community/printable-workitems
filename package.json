@@ -1,11 +1,9 @@
 {
 	"name": "com.siemens.bt.jazz.viewlet.printableworkitems",
-	"version": "1.0.7",
-	"description": "The 'My Teams' widget shows the teams one is member of in the selected/active project area. It also provides the same functionality as the Teams widget.",
+	"version": "1.1.0",
+	"description": "Define a custom configuration to display (as a widget) or print any workitem the way you like.",
 	"scripts": {
-		"build": "npm run babel-compile && webpack --config ./webpack.config.js --mode production",
-		"babel-compile": "babel ./resources/jazzUtilities/modules/src/ -d ./resources/jazzUtilities/modules/build/",
-		"babel-compile-single": "babel ./resources/jazzUtilities/modules/src/%COMPILE_FILE% -d ./resources/jazzUtilities/modules/build/"
+		"pack": "pack-jazz-web-plugin"
 	},
 	"main": "resources/Workitem.js",
 	"keywords": [
@@ -15,19 +13,11 @@
 	],
 	"author": "David Segura, Siemens",
 	"license": "MIT",
-	"dependencies": {
-		"jazz-update-site-webpack-plugin": "^0.4.1",
-		"webpack": "^4.42.0"
-	},
 	"devDependencies": {
 		"@actions/core": "^1.2.3",
-		"@babel/cli": "^7.13.16",
-		"@babel/compat-data": "^7.13.15",
-		"@babel/core": "^7.13.16",
-		"@babel/preset-env": "^7.13.15",
-		"disable-output-webpack-plugin": "^1.0.1",
-		"remove-files-webpack-plugin": "^1.4.0",
-		"typescript": "^3.8.3",
-		"webpack-cli": "^3.3.11"
+		"@jazz-community-org/pack-jazz-web-plugin": "^2.0.2"
+	},
+	"packJazzWebPlugin": {
+		"pluginId": "com.siemens.bt.jazz.viewlet.printableworkitems"
 	}
 }

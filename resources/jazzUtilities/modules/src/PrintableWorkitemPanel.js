@@ -1,11 +1,11 @@
-dojo.provide("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.build.PrintableWorkitemPanel");
+dojo.provide("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.src.PrintableWorkitemPanel");
 
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("dojox.uuid.generateRandomUuid");
 
 (function () {
-	dojo.declare("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.build.PrintableWorkitemPanel", [dijit._Widget, dijit._Templated], {
+	dojo.declare("com.siemens.bt.jazz.viewlet.printableworkitems.jazzUtilities.modules.src.PrintableWorkitemPanel", [dijit._Widget, dijit._Templated], {
 		templatePath: "",
 
 		parameterDTO: null,
@@ -14,7 +14,7 @@ dojo.require("dojox.uuid.generateRandomUuid");
 		isInputEnabled: false,
 		isDeferred: false, /*boolean.  False by default*/
 		getValuesDeferred: null, /*function(args).  If isDeferred is true, then this function must be provided for the parameter to fetch its values
-									The parameter can provide any additional arguments for the get request*/
+    The parameter can provide any additional arguments for the get request*/
 
 		// action handlers
 		valuesMouseOverHandler: null,
