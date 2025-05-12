@@ -15,7 +15,7 @@ jobs:
         id: npm_build
         run: |
           npm ci
-          npm run build
+          npm run pack
         env:
           CI: true
       - name: Upload release
