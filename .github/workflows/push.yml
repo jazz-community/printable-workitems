@@ -17,7 +17,7 @@ jobs:
         env:
           CI: true
       - name: Upload build result
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: printable-workitems-${{ github.sha }}
           path: ${{ steps.npm_build.outputs.output_file }}
